@@ -1,5 +1,5 @@
 <mat-toolbar>Contatos</mat-toolbar>
-<form [formGroup] (ngSubmit)="submit()">
+<form [formGroup]="formulario" (ngSubmit)="submit()">
     <mat-form-field class="full-width">
         <mat-label>Nome: </mat-label>
         <input formControlName="nome" matInput placeholder="Digite seu nome" />

@@ -12,6 +12,7 @@ import { FormBuilder, FormGroup, Validators } from  '@angular/forms'
 export class ContatoComponent implements OnInit {
 
   formulario : FormGroup;
+  contatos : Contato[] = [];
 
   constructor(
     private service : ContatoService,
@@ -26,18 +27,12 @@ export class ContatoComponent implements OnInit {
   }
 
   submit() {
-    const erroNomeRequired = this.formulario.controls.nome.errors.required
-    const erroEmailRequired = this.formulario.controls.email.errors.email
+    const formValues = this.formulario.value;
+    const contato : Contato = new Contato(formValues.nome, formValues.email);
 
-    console.log('erroNomeRequired :', erroNomeRequired);
-    console.log('erroEmailRequired :', erroEmailRequired);
-
-    console.log(this.formulario.value);
-    const isValid = this.formulario.valid;
-    console.log('is valid ', isValid)
-    /*this.service.save(c).subscribe(response => {
-      console.log(response);
-    })*/
+    this.service.save(contato).subscribe(response => {
+      this.contatos.push(response);
+    })
   }
 
 }
