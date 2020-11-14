@@ -37,7 +37,8 @@ export class ContatoComponent implements OnInit {
     const contato : Contato = new Contato(formValues.nome, formValues.email);
 
     this.service.save(contato).subscribe(response => {
-      this.contatos.push(response);
+      let lista : Contato[] = [...this.contatos, response]
+      this.contatos = lista; 
     })
   }
 
