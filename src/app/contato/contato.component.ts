@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ContatoService } from '../contato.service';
 import { Contato } from './contato';
+import { MatDialog } from '@angular/material/dialog';
 
-import { FormBuilder, FormGroup, Validators } from  '@angular/forms'
+import { FormBuilder, FormGroup, Validators } from  '@angular/forms';
+import { ContatoDetalheComponent } from '../contato-detalhe/contato-detalhe.component';
 
 @Component({
   selector: 'app-contato',
@@ -17,7 +19,8 @@ export class ContatoComponent implements OnInit {
 
   constructor(
     private service : ContatoService,
-    private fb : FormBuilder
+    private fb : FormBuilder,
+    private dialog : MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -61,6 +64,14 @@ export class ContatoComponent implements OnInit {
       const formData : FormData = new FormData();
       formData.append("foto", foto);
     }
+  }
+
+  visualizarContato(contato : Contato) {
+    this.dialog.open( ContatoDetalheComponent, {
+      width: '400px',
+      height: '450px',
+      data: contato
+    })
   }
 
 }
